@@ -23,9 +23,11 @@ createOrg2
 #
 docker-compose -f ./docker/docker-compose-couch.yaml -f ./docker/docker-compose-test-net.yaml up -d
 sleep 20
+echo "All network artifacts are created."
+pressAnyKey
+
+
 mkdir -p organizations/peerOrganizations/wrkdir/
-
-
 export CHANNEL=channel.n1
 setGlobals 1
 configtxgen -profile SampleAppChannelEtcdRaft -configPath ${PWD}/configtx -outputBlock organizations/peerOrganizations/wrkdir/${CHANNEL}.block -channelID ${CHANNEL}
