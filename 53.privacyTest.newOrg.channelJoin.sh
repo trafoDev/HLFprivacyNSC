@@ -10,7 +10,7 @@ export FABRIC_CFG_PATH=${HOME}/fabric-samples/config/
 #
 export CHANNEL=channel.n2
 setGlobals 2
-##exit
+#
 peer channel fetch 0 ./organizations/peerOrganizations/wrkdir/channel1.block -o ${ORDERER_ADDRESS} --ordererTLSHostnameOverride ${ORDERER_HOSTNAME} -c ${CHANNEL} --tls --cafile $ORDERER_CA
 sleep 2
 #
@@ -23,5 +23,8 @@ sleep 2
 #
 setGlobals 3
 ./scripts/setAnchorPeer.sh 3 ${CHANNEL}
+#
+osnadmin channel list -o localhost:11080 --ca-file $ORDERER_CA --client-cert ./organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/signcerts/cert.pem --client-key ./organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/keystore/key.pem
+peer channel list
 
 cd $PWD
