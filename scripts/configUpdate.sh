@@ -20,12 +20,12 @@ fetchChannelConfig() {
 
   infoln "Fetching the most recent configuration block for the channel"
   set -x
-  peer channel fetch config config_block.pb -o orderer.example.com:7050 --ordererTLSHostnameOverride orderer.example.com -c $CHANNEL --tls --cafile $ORDERER_CA
+  peer channel fetch config $WRKDIR/config_block.pb -o ${ORDERER_ADDRESS} --ordererTLSHostnameOverride orderer0.org${ORG}.example.com -c $CHANNEL --tls --cafile $ORDERER_CA
   { set +x; } 2>/dev/null
 
   infoln "Decoding config block to JSON and isolating config to ${OUTPUT}"
   set -x
-  configtxlator proto_decode --input config_block.pb --type common.Block | jq .data.data[0].payload.data.config >"${OUTPUT}"
+  configtxlator proto_decode --input $WRKDIR/config_block.pb --type common.Block | jq .data.data[0].payload.data.config >$WRKDIR/"${OUTPUT}"
   { set +x; } 2>/dev/null
 }
 
@@ -39,13 +39,13 @@ createConfigUpdate() {
   MODIFIED=$3
   OUTPUT=$4
 
-  set -x
-  configtxlator proto_encode --input "${ORIGINAL}" --type common.Config >original_config.pb
-  configtxlator proto_encode --input "${MODIFIED}" --type common.Config >modified_config.pb
-  configtxlator compute_update --channel_id "${CHANNEL}" --original original_config.pb --updated modified_config.pb >config_update.pb
-  configtxlator proto_decode --input config_update.pb --type common.ConfigUpdate >config_update.json
-  echo '{"payload":{"header":{"channel_header":{"channel_id":"'$CHANNEL'", "type":2}},"data":{"config_update":'$(cat config_update.json)'}}}' | jq . >config_update_in_envelope.json
-  configtxlator proto_encode --input config_update_in_envelope.json --type common.Envelope >"${OUTPUT}"
+  #set -x
+  configtxlator proto_encode --input $WRKDIR/"${ORIGINAL}" --type common.Config >$WRKDIR/original_config.pb
+  configtxlator proto_encode --input $WRKDIR/"${MODIFIED}" --type common.Config >$WRKDIR/modified_config.pb
+  configtxlator compute_update --channel_id "${CHANNEL}" --original $WRKDIR/original_config.pb --updated $WRKDIR/modified_config.pb >$WRKDIR/config_update.pb
+  configtxlator proto_decode --input $WRKDIR/config_update.pb --type common.ConfigUpdate >$WRKDIR/config_update.json
+  echo '{"payload":{"header":{"channel_header":{"channel_id":"'$CHANNEL'", "type":2}},"data":{"config_update":'$(cat $WRKDIR/config_update.json)'}}}' | jq . >$WRKDIR/config_update_in_envelope.json
+  configtxlator proto_encode --input $WRKDIR/config_update_in_envelope.json --type common.Envelope >$WRKDIR/"${OUTPUT}"
   { set +x; } 2>/dev/null
 }
 
@@ -56,6 +56,6 @@ signConfigtxAsPeerOrg() {
   CONFIGTXFILE=$2
   setGlobals $ORG
   set -x
-  peer channel signconfigtx -f "${CONFIGTXFILE}"
+  peer channel signconfigtx -f ${WRKDIR}/"${CONFIGTXFILE}"
   { set +x; } 2>/dev/null
 }

@@ -6,6 +6,9 @@ MYHOME=$PWD
 #clearing data from the third part of testing scenario
 #./39.privacyTestPart3.clearNetwork.sh
 
+#clearing data from the org3 test
+./59.clearNetwork.newOrg.clear.sh
+
 #clearing the network
 . scripts/utils.sh
 

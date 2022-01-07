@@ -1,7 +1,7 @@
 MYHOME=$PWD
 . env.sh
 
-cleaning the network from previous tests
+#cleaning the network from previous tests
 ./99.clearNetwork.sh
 #
 export PATH=${HOME}/fabric-samples/bin:$PATH
@@ -69,25 +69,8 @@ osnadmin channel list -o localhost:9080 --ca-file $ORDERER_CA --client-cert ./or
 peer channel join -b organizations/peerOrganizations/wrkdir/${CHANNEL}.block
 peer channel list
 #
-
-
-#cd
-#cd fabric-samples/test-network
-#cleaning the network from previous tests
-#./network.sh down
-#cd addOrg3
-#./addOrg3.sh down
-#cd .. 
-#create a simple network (two orgs) with marbles chaincode with PCD enabled
-#./network.sh up createChannel -ca -s couchdb -c channel.n1
-#./network.sh deployCC -ccn private -ccp ../chaincode/marbles02_private/go/ \
-#                      -ccl go -ccep "AND('Org1MSP.peer','Org2MSP.peer')" \
-#                      -cccg ../chaincode/marbles02_private/collections_config.json -c channel.n1
-#create a simple network (two orgs) with marbles chaincode - no PCD
-#exit
-#./network.sh createChannel -c channel.n2
-./network.sh deployCC -ccn private -ccp ../fabric-samples/chaincode/marbles02/go/ \
+./network.sh deployCC -ccn marblesNoPDC -ccp ../fabric-samples/chaincode/marbles02/go/ \
                       -ccl go -ccep "AND('Org1MSP.peer','Org2MSP.peer')" \
-                      -c ${CHANNEL} -ccn marblesNoPDC
+                      -c ${CHANNEL} 
 
 cd $PWD

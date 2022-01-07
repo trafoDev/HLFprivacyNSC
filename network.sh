@@ -312,6 +312,14 @@ function deployCC() {
   fi
 }
 
+## Call the script to deploy a chaincode to the channel
+function deployNewCC() {
+  ./deployNewCC.sh $CHANNEL_NAME $CC_NAME $CC_SRC_PATH $CC_SRC_LANGUAGE $CC_VERSION $CC_SEQUENCE $CC_INIT_FCN $CC_END_POLICY $CC_COLL_CONFIG $CLI_DELAY $MAX_RETRY $VERBOSE
+
+  if [ $? -ne 0 ]; then
+    fatalln "Deploying chaincode failed"
+  fi
+}
 
 # Tear down running network
 function networkDown() {
@@ -503,6 +511,8 @@ elif [ "$MODE" == "restart" ]; then
   infoln "Restarting network"
 elif [ "$MODE" == "deployCC" ]; then
   infoln "deploying chaincode on channel '${CHANNEL_NAME}'"
+elif [ "$MODE" == "deployNewCC" ]; then
+  infoln "deploying New chaincode on channel '${CHANNEL_NAME}'"
 else
   printHelp
   exit 1
@@ -514,6 +524,8 @@ elif [ "${MODE}" == "createChannel" ]; then
   createChannel
 elif [ "${MODE}" == "deployCC" ]; then
   deployCC
+elif [ "${MODE}" == "deployNewCC" ]; then
+  deployNewCC
 elif [ "${MODE}" == "down" ]; then
   networkDown
 else

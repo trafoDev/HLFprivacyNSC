@@ -14,6 +14,8 @@ export CORE_PEER_TLS_ENABLED=true
 export PEER0_ORG1_CA=${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
 export PEER0_ORG2_CA=${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
 export PEER0_ORG3_CA=${PWD}/organizations/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls/ca.crt
+export WRKDIR=./organizations/peerOrganizations/wrkdir
+
 
 # Set environment variables for the peer org
 setGlobals() {
@@ -29,21 +31,32 @@ setGlobals() {
     export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG1_CA
     export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
     export CORE_PEER_ADDRESS=localhost:7051
+    export ORDERER_HOSTNAME=orderer0.org1.example.com
     export ORDERER_ADDRESS=localhost:7050
     export ORDERER_CA=${PWD}/organizations/peerOrganizations/org1.example.com/orderers/orderer0.org1.example.com/tls/tlscacerts/tls-localhost-7054-ca-org1.pem
+    export ORDERER_TLS_CERT=${PWD}/organizations/peerOrganizations/org1.example.com/orderers/orderer0.org1.example.com/tls/signcerts/cert.pem
   elif [ $USING_ORG -eq 2 ]; then
     export CORE_PEER_LOCALMSPID="Org2MSP"
     export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG2_CA
     export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
     export CORE_PEER_ADDRESS=localhost:9051
+    export ORDERER_HOSTNAME=orderer0.org2.example.com
     export ORDERER_ADDRESS=localhost:9050
     export ORDERER_CA=${PWD}/organizations/peerOrganizations/org2.example.com/orderers/orderer0.org2.example.com/tls/tlscacerts/tls-localhost-9054-ca-org2.pem
+    export ORDERER_TLS_CERT=${PWD}/organizations/peerOrganizations/org2.example.com/orderers/orderer0.org2.example.com/tls/signcerts/cert.pem
   elif [ $USING_ORG -eq 3 ]; then
     export CORE_PEER_LOCALMSPID="Org3MSP"
     export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG3_CA
     export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp
     export CORE_PEER_ADDRESS=localhost:11051
-    export ORDERER_CA=${PWD}/organizations/peerOrganizations/org2.example.com/orderers/orderer0.org2.example.com/tls/tlscacerts/tls-localhost-9054-ca-org2.pem
+    export ORDERER_HOSTNAME=orderer0.org3.example.com
+    export ORDERER_ADDRESS=localhost:11050
+    export ORDERER_CA=${PWD}/organizations/peerOrganizations/org3.example.com/orderers/orderer0.org3.example.com/tls/tlscacerts/tls-localhost-11054-ca-org3.pem
+    #export ORDERER_TLS_CERT=${PWD}/organizations/peerOrganizations/org3.example.com/orderers/orderer0.org2.example.com/tls/signcerts/cert.pem
+    #export ORDERER_HOSTNAME=orderer0.org2.example.com
+    #export ORDERER_ADDRESS=localhost:9050
+    #export ORDERER_CA=${PWD}/organizations/peerOrganizations/org2.example.com/orderers/orderer0.org2.example.com/tls/tlscacerts/tls-localhost-9054-ca-org2.pem
+    export ORDERER_TLS_CERT=${PWD}/organizations/peerOrganizations/org3.example.com/orderers/orderer0.org3.example.com/tls/signcerts/cert.pem
   else
     errorln "ORG Unknown"
   fi
