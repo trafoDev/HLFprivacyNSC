@@ -14,15 +14,22 @@ mkdir -p organizations/peerOrganizations/fabric-ca/
 cp -r ${PWD}/organizations/fabric-ca/* ${PWD}/organizations/peerOrganizations/fabric-ca
 sed -i 's/organizations\/fabric-ca/organizations\/peerOrganizations\/fabric-ca/' ${PWD}/organizations/peerOrganizations/fabric-ca/registerEnroll.sh
 #
-docker-compose -f ./docker/docker-compose-ca.yaml up -d
+docker network create net_test
+sleep 2
+#
+docker-compose -f ./docker/docker-compose-ca1.yaml -f ./docker/docker-compose-network.yaml up -d
+docker-compose -f ./docker/docker-compose-ca2.yaml -f ./docker/docker-compose-network.yaml up -d
 sleep 20
 . organizations/peerOrganizations/fabric-ca/registerEnroll.sh
 #
 createOrg1
 createOrg2
 #
-docker-compose -f ./docker/docker-compose-couch.yaml -f ./docker/docker-compose-test-net.yaml up -d
+docker-compose -f ./docker/docker-compose-couch1.yaml -f ./docker/docker-compose-test-net1.yaml -f ./docker/docker-compose-network.yaml up -d
+docker-compose -f ./docker/docker-compose-couch2.yaml -f ./docker/docker-compose-test-net2.yaml -f ./docker/docker-compose-network.yaml up -d
 sleep 20
+docker-compose -f ./docker/docker-compose-cli.yaml -f ./docker/docker-compose-network.yaml up -d
+sleep 10
 echo "All network artifacts are created."
 pressAnyKey
 

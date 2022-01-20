@@ -1,0 +1,41 @@
+version: '2'
+
+volumes:
+  net_orderer0.org1.example.com:
+    external: true
+  net_orderer0.org2.example.com:
+    external: true
+  net_orderer0.org3.example.com:
+    external: true
+  net_peer0.org1.example.com:
+    external: true
+  net_peer0.org2.example.com:
+    external: true
+  net_peer0.org3.example.com:
+    external: true
+
+services:
+  cli.volumes:
+    container_name: cli.volumes
+    image: hyperledger/fabric-tools
+    tty: true
+    stdin_open: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - FABRIC_LOGGING_SPEC=INFO
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: /bin/bash
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../organizations:/opt/gopath/src/github.com/hyperledger/fabric/peer/organizations
+        - ../scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
+        #configuration to monitor the network nodes 
+        - net_peer0.org1.example.com:/opt/gopath/src/github.com/hyperledger/fabric/peer/peer0.org1.example.com
+        - net_peer0.org2.example.com:/opt/gopath/src/github.com/hyperledger/fabric/peer/peer0.org2.example.com
+        - net_peer0.org3.example.com:/opt/gopath/src/github.com/hyperledger/fabric/peer/peer0.org3.example.com
+        - net_orderer0.org1.example.com:/opt/gopath/src/github.com/hyperledger/fabric/peer/orderer0.org1.example.com
+        - net_orderer0.org2.example.com:/opt/gopath/src/github.com/hyperledger/fabric/peer/orderer0.org2.example.com
+        - net_orderer0.org3.example.com:/opt/gopath/src/github.com/hyperledger/fabric/peer/orderer0.org3.example.com
+    networks:
+      - test

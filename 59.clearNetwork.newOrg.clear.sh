@@ -9,8 +9,8 @@ MYHOME=$PWD
 #clearing the network
 . scripts/utils.sh
 
-docker-compose -f ./docker/docker-compose-couch3.yaml -f ./docker/docker-compose-test-net3.yaml down
-docker-compose -f ./docker/docker-compose-ca3.yaml down
+docker-compose -f ./docker/docker-compose-couch3.yaml -f ./docker/docker-compose-test-net3.yaml -f ./docker/docker-compose-network.yaml down
+docker-compose -f ./docker/docker-compose-ca3.yaml -f ./docker/docker-compose-network.yaml down
 #
 docker volume rm ${COMPOSE_PROJECT_NAME}_orderer0.org3.example.com
 docker volume rm ${COMPOSE_PROJECT_NAME}_peer0.org3.example.com

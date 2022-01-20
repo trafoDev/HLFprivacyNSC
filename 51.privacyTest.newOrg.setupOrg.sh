@@ -7,14 +7,14 @@ export FABRIC_CFG_PATH=${HOME}/fabric-samples/config/
 . scripts/utils.sh
 . scripts/envVar.sh
 #
-docker-compose -f ./docker/docker-compose-ca3.yaml up -d
+docker-compose -f ./docker/docker-compose-ca3.yaml -f ./docker/docker-compose-network.yaml up -d
 sleep 20
 #
 . organizations/peerOrganizations/fabric-ca/registerEnroll.sh
 #
 createOrg3
 #
-docker-compose -f ./docker/docker-compose-couch3.yaml -f ./docker/docker-compose-test-net3.yaml up -d
+docker-compose -f ./docker/docker-compose-couch3.yaml -f ./docker/docker-compose-test-net3.yaml -f ./docker/docker-compose-network.yaml up -d
 sleep 20
 #
 configtxgen -printOrg Org3MSP -configPath ./addOrg3 > ${WRKDIR}/org3.json
