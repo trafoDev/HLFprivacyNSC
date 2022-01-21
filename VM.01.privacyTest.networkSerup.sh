@@ -1,9 +1,9 @@
 MYHOME=$PWD
 . env.sh
-local ORG=${1}
 #cleaning the network from previous tests
 ./99.clearNetwork.sh
 #
+HOST_ORG=${1}
 export PATH=${HOME}/fabric-samples/bin:$PATH
 export FABRIC_CFG_PATH=${HOME}/fabric-samples/config/
 #
@@ -14,16 +14,17 @@ mkdir -p organizations/peerOrganizations/fabric-ca/
 cp -r ${PWD}/organizations/fabric-ca/* ${PWD}/organizations/peerOrganizations/fabric-ca
 sed -i 's/organizations\/fabric-ca/organizations\/peerOrganizations\/fabric-ca/' ${PWD}/organizations/peerOrganizations/fabric-ca/registerEnroll.sh
 #
-echo "please make sure there is docker swarm network defined, named as net_test"
+echo "Ogr - " ${HOST_ORG}
+echo "Please make sure there is docker swarm network defined, named as net_test"
 pressAnyKey
 #
-docker-compose -f ./docker/docker-compose-ca${ORG}.yaml -f ./docker/docker-compose-network.yaml up -d
+docker-compose -f ./docker/docker-compose-ca${HOST_ORG}.yaml -f ./docker/docker-compose-network.yaml up -d
 sleep 20
 . organizations/peerOrganizations/fabric-ca/registerEnroll.sh
 #
-createOrg${ORG}
+createOrg${HOST_ORG}
 #
-docker-compose -f ./docker/docker-compose-couch${ORG}.yaml -f ./docker/docker-compose-test-net${ORG}.yaml -f ./docker/docker-compose-network.yaml up -d
+docker-compose -f ./docker/docker-compose-couch${HOST_ORG}.yaml -f ./docker/docker-compose-test-net${HOST_ORG}.yaml -f ./docker/docker-compose-network.yaml up -d
 sleep 20
 docker-compose -f ./docker/docker-compose-cli.yaml -f ./docker/docker-compose-network.yaml up -d
 sleep 10
