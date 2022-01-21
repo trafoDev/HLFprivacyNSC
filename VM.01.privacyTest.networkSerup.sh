@@ -21,7 +21,7 @@ pressAnyKey
 #
 docker-compose -f ./VMdocker/docker-compose-ca${HOST_ORG}.yaml -f ./VMdocker/docker-compose-network.yaml up -d
 sleep 20
-. organizations/peerOrganizations/fabric-ca/registerEnroll.sh
+. organizations/peerOrganizations/fabric-ca/VM.registerEnroll.sh
 #
 createOrg${HOST_ORG}
 #
