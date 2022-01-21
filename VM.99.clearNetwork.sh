@@ -13,7 +13,7 @@ docker-compose -f ./VMdocker/docker-compose-couch${HOST_ORG}.yaml -f ./VMdocker/
 docker-compose -f ./VMdocker/docker-compose-ca${HOST_ORG}.yaml  -f ./VMdocker/docker-compose-network.yaml down
 docker-compose -f ./VMdocker/docker-compose-cli.yaml  -f ./VMdocker/docker-compose-network.yaml down
 #
-docker network rm net_test
+###docker network rm net_test
 #
 docker volume rm ${COMPOSE_PROJECT_NAME}_orderer0.org${HOST_ORG}.example.com
 docker volume rm ${COMPOSE_PROJECT_NAME}_peer0.org${HOST_ORG}.example.com
