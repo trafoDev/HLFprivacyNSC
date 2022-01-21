@@ -7,7 +7,7 @@ export PATH=${HOME}/fabric-samples/bin:$PATH
 export FABRIC_CFG_PATH=${HOME}/fabric-samples/config/
 #
 . scripts/utils.sh
-. scripts/envVar.sh
+. scripts/VM.envVar.sh
 #
 #
 export CHANNEL=channel.n1
