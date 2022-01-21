@@ -19,15 +19,15 @@ echo "Ogr - " ${HOST_ORG}
 echo "Please make sure there is docker swarm network defined, named as net_test"
 pressAnyKey
 #
-docker-compose -f ./docker/docker-compose-ca${HOST_ORG}.yaml -f ./docker/docker-compose-network.yaml up -d
+docker-compose -f ./VMdocker/docker-compose-ca${HOST_ORG}.yaml -f ./VMdocker/docker-compose-network.yaml up -d
 sleep 20
 . organizations/peerOrganizations/fabric-ca/registerEnroll.sh
 #
 createOrg${HOST_ORG}
 #
-docker-compose -f ./docker/docker-compose-couch${HOST_ORG}.yaml -f ./docker/docker-compose-test-net${HOST_ORG}.yaml -f ./docker/docker-compose-network.yaml up -d
+docker-compose -f ./VMdocker/docker-compose-couch${HOST_ORG}.yaml -f ./VMdocker/docker-compose-test-net${HOST_ORG}.yaml -f ./VMdocker/docker-compose-network.yaml up -d
 sleep 20
-docker-compose -f ./docker/docker-compose-cli.yaml -f ./docker/docker-compose-network.yaml up -d
+docker-compose -f ./VMdocker/docker-compose-cli.yaml -f ./VMdocker/docker-compose-network.yaml up -d
 sleep 10
 echo "All network artifacts are created."
 pressAnyKey
