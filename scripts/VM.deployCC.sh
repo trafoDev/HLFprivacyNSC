@@ -286,7 +286,7 @@ chaincodeQuery() {
 ## package the chaincode
 packageChaincode
 
-HOST_ORG=${1}
+
 
 ## Install chaincode on peer0.org1 and peer0.org2
 infoln "Installing chaincode on peer0.org${HOST_ORG}..."

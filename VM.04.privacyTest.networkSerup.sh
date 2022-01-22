@@ -1,7 +1,7 @@
 MYHOME=$PWD
 . env.sh
 #cleaning the network from previous tests
-HOST_ORG=${1}
+export HOST_ORG=${1}
 #
 export PATH=${HOME}/fabric-samples/bin:$PATH
 export FABRIC_CFG_PATH=${HOME}/fabric-samples/config/
