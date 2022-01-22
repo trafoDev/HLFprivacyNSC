@@ -307,7 +307,8 @@ checkCommitReadiness ${HOST_ORG} "\"Org${HOST_ORG}MSP\": true"
 commitChaincodeDefinition ${HOST_ORG}
 
 ## query on both orgs to see that the definition committed successfully
-queryCommitted ${HOST_ORG}
+##queryCommitted ${HOST_ORG}
+queryCommitted 1 2
 
 ## Invoke the chaincode - this does require that the chaincode have the 'initLedger'
 ## method defined
