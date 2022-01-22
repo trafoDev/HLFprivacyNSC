@@ -12,11 +12,11 @@ export FABRIC_CFG_PATH=${HOME}/fabric-samples/config/
 mkdir -p organizations/peerOrganizations/wrkdir/
 export CHANNEL=channel.n1
 setGlobals 1
-configtxgen -profile SampleAppChannelEtcdRaft -configPath ${PWD}/configtx -outputBlock organizations/peerOrganizations/wrkdir/${CHANNEL}.block -channelID ${CHANNEL}
+configtxgen -profile SampleAppChannelEtcdRaft -configPath ${PWD}/VMconfigtx -outputBlock organizations/peerOrganizations/wrkdir/${CHANNEL}.block -channelID ${CHANNEL}
 
 # Create channel
 export CHANNEL=channel.n2
 setGlobals 1
-configtxgen -profile SampleAppChannelEtcdRaft -configPath ${PWD}/configtx -outputBlock organizations/peerOrganizations/wrkdir/${CHANNEL}.block -channelID ${CHANNEL}
+configtxgen -profile SampleAppChannelEtcdRaft -configPath ${PWD}/VMconfigtx -outputBlock organizations/peerOrganizations/wrkdir/${CHANNEL}.block -channelID ${CHANNEL}
 
 cd $PWD
