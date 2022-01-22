@@ -15,16 +15,16 @@ function createOrg() {
   echo 'NodeOUs:
   Enable: true
   ClientOUIdentifier:
-    Certificate: cacerts/localhost-7054-ca-org${HOST_ORG}.pem
+    Certificate: cacerts/localhost-7054-ca-org'${HOST_ORG}'.pem
     OrganizationalUnitIdentifier: client
   PeerOUIdentifier:
-    Certificate: cacerts/localhost-7054-ca-org${HOST_ORG}.pem
+    Certificate: cacerts/localhost-7054-ca-org'${HOST_ORG}'.pem
     OrganizationalUnitIdentifier: peer
   AdminOUIdentifier:
-    Certificate: cacerts/localhost-7054-ca-org${HOST_ORG}.pem
+    Certificate: cacerts/localhost-7054-ca-org'${HOST_ORG}'.pem
     OrganizationalUnitIdentifier: admin
   OrdererOUIdentifier:
-    Certificate: cacerts/localhost-7054-ca-org${HOST_ORG}.pem
+    Certificate: cacerts/localhost-7054-ca-org'${HOST_ORG}'.pem
     OrganizationalUnitIdentifier: orderer' >${PWD}/organizations/peerOrganizations/org${HOST_ORG}.example.com/msp/config.yaml
 
   infoln "Registering peer0"
