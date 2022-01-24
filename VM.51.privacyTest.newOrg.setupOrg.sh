@@ -9,6 +9,8 @@ HOST_ORG=${1}
 . scripts/utils.sh
 . scripts/VM.envVar.sh
 #
+mkdir -p organizations/peerOrganizations/wrkdir/
+#
 echo 'Organizations:
     - &Org'${HOST_ORG}'
         Name: Org'${HOST_ORG}'MSP
