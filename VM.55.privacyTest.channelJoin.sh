@@ -1,5 +1,5 @@
 MYHOME=$PWD
-. env.sh
+. VM.env.sh
 #cleaning the network from previous tests
 HOST_ORG=${1}
 #
