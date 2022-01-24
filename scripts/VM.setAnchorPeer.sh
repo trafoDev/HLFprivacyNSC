@@ -7,7 +7,7 @@
 
 # import utils
 . scripts/VM.envVar.sh
-. scripts/configUpdate.sh
+. scripts/VM.configUpdate.sh
 
 
 # NOTE: this must be run in a CLI container since it requires jq and configtxlator 
