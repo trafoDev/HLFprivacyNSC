@@ -17,4 +17,6 @@ setGlobals ${HOST_ORG}
 #
 peer channel update -f ${WRKDIR}/org${NEW_ORG}_update_in_envelope.pb -c ${CHANNEL} -o ${ORDERER_ADDRESS} --ordererTLSHostnameOverride ${ORDERER_HOSTNAME} --tls --cafile $ORDERER_CA
 #
+peer channel fetch 0 ${WRKDIR}/channel1.block -o ${ORDERER_ADDRESS} --ordererTLSHostnameOverride ${ORDERER_HOSTNAME} -c ${CHANNEL} --tls --cafile $ORDERER_CA
+#
 cd $PWD
