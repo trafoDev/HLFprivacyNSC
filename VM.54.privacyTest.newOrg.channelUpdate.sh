@@ -15,6 +15,6 @@ export CHANNEL=channel.n2
 #
 setGlobals ${HOST_ORG}
 #
-signConfigtxAsPeerOrg ${HOST_ORG} org${NEW_ORG}_update_in_envelope.pb
+peer channel update -f ${WRKDIR}/org${NEW_ORG}_update_in_envelope.pb -c ${CHANNEL} -o ${ORDERER_ADDRESS} --ordererTLSHostnameOverride ${ORDERER_HOSTNAME} --tls --cafile $ORDERER_CA
 #
 cd $PWD
