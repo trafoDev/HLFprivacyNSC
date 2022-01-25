@@ -28,5 +28,6 @@ osnadmin channel list -o localhost:7080 --ca-file $ORDERER_CA --client-cert ./or
 peer channel join -b organizations/peerOrganizations/wrkdir/${CHANNEL}.block
 peer channel list
 #
-
+sleep 20
+#
 cd $PWD
